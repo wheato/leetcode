@@ -14,5 +14,3 @@ var reverse = function(x) {
   var num =  Number(s) * n
   return num > Math.pow(2, 31) - 1 || num < Math.pow(-2, 31) - 1 ? 0 : num
 };
-
-console.log(reverse(-120))
