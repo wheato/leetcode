@@ -31,5 +31,3 @@ var convert = function(s, numRows) {
 
   return arrs.map(line => line.join('')).join('')
 };
-
-console.log(convert('AB', 1))
