@@ -13,27 +13,33 @@ var trap = function(height) {
       continue
     }
     for(j = i + 1; j < height.length; j++) {
+      max = height[j] >= max[1] ? [j, height[j]] : max
+      nums.push(height[j])
       if (height[j] >= height[i]) {
-        let flag = Math.min(height[j], height[i])
-        let num = nums.pop()
-        let count = 0
-        while(typeof num !== 'undefined') {
-          if (num < flag) {
-            count = count + (flag - num)
-          }
-          num = nums.pop()
-        }
-        result.push(count)
-        i = j - 1
         break
-      } else {
-        max = height[j] >= max[1] ? [j, height[j]] : max
-        nums.push(height[j])
       }
     }
-    i += 1
+    if (max[0] - i > 1) {
+      let num = nums.pop()
+      while (num !== max[1]) {
+        num = nums.pop()
+      }
+      let flag = Math.min(num, height[i])
+      let count = 0
+      while(typeof num !== 'undefined') {
+        if (flag > num) {
+          count = count + (flag - num)
+        }
+        num = nums.pop()
+      }
+      result.push(count)
+      i = max[0] - 1
+    } else {
+      i += 1
+    }
   }
   return result.reduce((acc, n) => acc + n, 0)
 };
 
-console.log(trap([4,9,4,5,3,2]))
+// console.log(trap([0,1,0,2,1,0,1,3,2,1,2,1]))
+console.log(trap([4,2,3,4,1,1,5]))
